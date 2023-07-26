@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   tasks:
     - name: Set mock data as a fact
       delegate_to: localhost
@@ -55,12 +55,10 @@
         mode: 0644
         src: wrapper.xml.j2
         dest: ./rpc.xml
-      vars:
-        payload: "{{ intermediate_string }}"
 
-    - name: Get the pre-change config using the filter
-      ansible.netcommon.netconf_rpc:
-        rpc: edit-config
-        xmlns: "urn:ietf:params:xml:ns:netconf:base:1.0"
-        content: "{{ lookup('file', 'rpc.xml') }}"
-      register: xml
+    # - name: Get the pre-change config using the filter
+    #   ansible.netcommon.netconf_rpc:
+    #     rpc: edit-config
+    #     xmlns: "urn:ietf:params:xml:ns:netconf:base:1.0"
+    #     content: "{{ lookup('file', 'rpc.xml') }}"
+    #   register: xml
