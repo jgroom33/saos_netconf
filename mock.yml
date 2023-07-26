@@ -1,0 +1,66 @@
+---
+- hosts: all
+  tasks:
+    - name: Set mock data as a fact
+      delegate_to: localhost
+      set_fact:
+        data:
+          interfaces:
+            - { name: lb1,  ip: 172.16.0.1,  type: loopback,  ipv6: fc00::1 }
+            - { name: if1,  ip: 172.16.1.1, type: ip, ipv6: fc00::600,  vlan: 600, port: 1,  nni: true, level: level-1}
+            - { name: if5,  ip: 172.16.103.1, type: ip, ipv6: fc00::605, vlan: 103, port: 5,  nni: false}
+          isis:         # Interfaces where nni = true are added
+            net: 49.0001.0172.0016.0001.00
+            tag: Bootcamp
+          bgp:          # router-id: auto calculated
+            as: 65032
+            peers: 
+              - { address: 172.16.0.2, remote-as: 65032, address-family: { route-reflector-client: 'false' } }
+          vrf:
+            #### applied to vrf
+            name: vlan103_vpn
+            # applied to bgp object
+            route-distinguisher: 0:130:1
+            route-target: { id: 0:103:1, direction: both }
+            #### applied to rib
+            destination-prefix: 1.1.1.1
+            next-hop:
+              address: 172.16.103.2
+              outgoing-interface-name: if5
+              tag: 30
+              description: DefaultRt
+    - name: Render the first jinja template
+      delegate_to: localhost
+      template:
+        mode: 0644
+        src: PE_create.xml.j2
+        dest: /tmp/PE_create.xml
+      register: result1
+
+    - name: Read the intermediate result
+      delegate_to: localhost
+      command:
+        cmd: cat /tmp/PE_create.xml
+      register: payload
+      changed_when: false
+
+    - name: Set intermediate result as fact
+      delegate_to: localhost
+      set_fact:
+        payload: "{{ payload.stdout }}"
+
+    - name: Render the second jinja template
+      delegate_to: localhost
+      template:
+        mode: 0644
+        src: wrapper.xml.j2
+        dest: ./rpc.xml
+      vars:
+        payload: "{{ intermediate_string }}"
+
+    - name: Get the pre-change config using the filter
+      ansible.netcommon.netconf_rpc:
+        rpc: edit-config
+        xmlns: "urn:ietf:params:xml:ns:netconf:base:1.0"
+        content: "{{ lookup('file', 'rpc.xml') }}"
+      register: xml

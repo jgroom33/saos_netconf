@@ -1,0 +1,50 @@
+{# comment line #}
+<config>
+    <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+{% for interface in data.interfaces %}
+    {% if interface.vlan is defined %}
+        <classifier xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <name>VLAN{{ interface.vlan }}</name>
+        </classifier>
+    {% endif %}
+{% endfor %}
+    </classifiers>
+    <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+{% for interface in data.interfaces %}
+    {% if interface.vlan is defined %}
+        <fd xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <name>VLAN{{ interface.vlan }}</name>
+        </fd>
+    {% endif %}
+{% endfor %}
+    </fds>
+    <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+{% for interface in data.interfaces %}
+    {% if interface.vlan is defined %}
+        <fp xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <name>VLAN{{ interface.vlan }}</name>
+        </fp>
+    {% endif %}
+{% endfor %}
+    </fps>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+{% for interface in data.interfaces %}
+        <interface xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <name>{{ interface.name }}</name>
+        </interface>
+{% endfor %}
+    </interfaces>
+    <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
+        <instance xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <net>{{ data.isis.net }}</net>
+            <tag>{{ data.isis.tag }}</tag>
+        </instance>
+    </isis>
+{% if data.bgp is defined %}
+    <bgp xmlns="http://ciena.com/ns/yang/ciena-bgp">
+        <instance xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" nc:operation="remove">
+            <as>{{ data.bgp.as }}</as>
+        </instance>
+    </bgp>
+{% endif %}
+</config>
