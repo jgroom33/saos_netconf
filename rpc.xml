@@ -1,302 +1,300 @@
-<edit-config>
-    <target>
-        <running />
-    </target>
-    <default-operation>merge</default-operation>
-    <config>
-        <system xmlns="http://openconfig.net/yang/system">
-            <config>
-                <hostname>localhost</hostname>
-            </config>
-        </system>
-        <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
-            <classifier>
-                <name>VLAN600</name>
-                <filter-entry>
-                    <filter-parameter>vtag-stack</filter-parameter>
-                    <vtags>
-                        <tag>1</tag>
-                        <vlan-id>600</vlan-id>
-                    </vtags>
-                </filter-entry>
-            </classifier>
-            <classifier>
-                <name>VLAN103</name>
-                <filter-entry>
-                    <filter-parameter>vtag-stack</filter-parameter>
-                    <vtags>
-                        <tag>1</tag>
-                        <vlan-id>103</vlan-id>
-                    </vtags>
-                </filter-entry>
-            </classifier>
+<target>
+  <running />
+</target>
+<default-operation>merge</default-operation>
+<config>
+    <system xmlns="http://openconfig.net/yang/system">
+        <config>
+            <hostname>localhost</hostname>
+        </config>
+    </system>
+    <classifiers xmlns="urn:ciena:params:xml:ns:yang:ciena-pn::ciena-mef-classifier">
+                <classifier>
+            <name>VLAN600</name>
+            <filter-entry>
+                <filter-parameter>vtag-stack</filter-parameter>
+                <vtags>
+                    <tag>1</tag>
+                    <vlan-id>600</vlan-id>
+                </vtags>
+            </filter-entry>
+        </classifier>
+                <classifier>
+            <name>VLAN103</name>
+            <filter-entry>
+                <filter-parameter>vtag-stack</filter-parameter>
+                <vtags>
+                    <tag>1</tag>
+                    <vlan-id>103</vlan-id>
+                </vtags>
+            </filter-entry>
+        </classifier>
         </classifiers>
-        <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
-            <fd>
-                <name>VLAN600</name>
-                <mode>vpls</mode>
-            </fd>
-            <fd>
-                <name>VLAN103</name>
-                <mode>vpls</mode>
-            </fd>
+    <fds xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fd">
+                <fd>
+            <name>VLAN600</name>
+            <mode>vpls</mode>
+        </fd>
+                <fd>
+            <name>VLAN103</name>
+            <mode>vpls</mode>
+        </fd>
         </fds>
-        <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
-            <fp>
-                <name>VLAN600</name>
-                <fd-name>VLAN600</fd-name>
-                <logical-port>1</logical-port>
-                <stats-collection>on</stats-collection>
-                <ingress-l2-transform>
-                    <ingress-name>pop-vid-600</ingress-name>
-                    <vlan-stack>
-                        <tag>1</tag>
-                        <pop-type />
-                    </vlan-stack>
-                </ingress-l2-transform>
-                <egress-l2-transform>
-                    <egress-name>push-vid-600</egress-name>
-                    <vlan-stack>
-                        <tag>1</tag>
-                        <push-tpid>tpid-8100</push-tpid>
-                        <push-vid>600</push-vid>
-                    </vlan-stack>
-                </egress-l2-transform>
-                <classifier-list>VLAN600</classifier-list>
-                <classifier-list-precedence>7</classifier-list-precedence>
-            </fp>
-            <fp>
-                <name>VLAN103</name>
-                <fd-name>VLAN103</fd-name>
-                <logical-port>5</logical-port>
-                <stats-collection>on</stats-collection>
-                <ingress-l2-transform>
-                    <ingress-name>pop-vid-103</ingress-name>
-                    <vlan-stack>
-                        <tag>1</tag>
-                        <pop-type />
-                    </vlan-stack>
-                </ingress-l2-transform>
-                <egress-l2-transform>
-                    <egress-name>push-vid-103</egress-name>
-                    <vlan-stack>
-                        <tag>1</tag>
-                        <push-tpid>tpid-8100</push-tpid>
-                        <push-vid>103</push-vid>
-                    </vlan-stack>
-                </egress-l2-transform>
-                <classifier-list>VLAN103</classifier-list>
-                <classifier-list-precedence>7</classifier-list-precedence>
-            </fp>
+    <fps xmlns="urn:ciena:params:xml:ns:yang:ciena-pn:ciena-mef-fp">
+                <fp>
+            <name>VLAN600</name>
+            <fd-name>VLAN600</fd-name>
+            <logical-port>1</logical-port>
+            <stats-collection>on</stats-collection>
+            <ingress-l2-transform>
+                <ingress-name>pop-vid-600</ingress-name>
+                <vlan-stack>
+                    <tag>1</tag>
+                    <pop-type />
+                </vlan-stack>
+            </ingress-l2-transform>
+            <egress-l2-transform>
+                <egress-name>push-vid-600</egress-name>
+                <vlan-stack>
+                    <tag>1</tag>
+                    <push-tpid>tpid-8100</push-tpid>
+                    <push-vid>600</push-vid>
+                </vlan-stack>
+            </egress-l2-transform>
+            <classifier-list>VLAN600</classifier-list>
+            <classifier-list-precedence>7</classifier-list-precedence>
+        </fp>
+                <fp>
+            <name>VLAN103</name>
+            <fd-name>VLAN103</fd-name>
+            <logical-port>5</logical-port>
+            <stats-collection>on</stats-collection>
+            <ingress-l2-transform>
+                <ingress-name>pop-vid-103</ingress-name>
+                <vlan-stack>
+                    <tag>1</tag>
+                    <pop-type />
+                </vlan-stack>
+            </ingress-l2-transform>
+            <egress-l2-transform>
+                <egress-name>push-vid-103</egress-name>
+                <vlan-stack>
+                    <tag>1</tag>
+                    <push-tpid>tpid-8100</push-tpid>
+                    <push-vid>103</push-vid>
+                </vlan-stack>
+            </egress-l2-transform>
+            <classifier-list>VLAN103</classifier-list>
+            <classifier-list-precedence>7</classifier-list-precedence>
+        </fp>
         </fps>
-        <interfaces xmlns="http://openconfig.net/yang/interfaces">
-            <interface>
+    <interfaces xmlns="http://openconfig.net/yang/interfaces">
+        <interface>
+            <name>lb1</name>
+            <config>
                 <name>lb1</name>
-                <config>
-                    <name>lb1</name>
-                    <mtu>1500</mtu>
-                    <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
-                    <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">loopback</type>
+                <mtu>1500</mtu>
+                <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+                <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">loopback</type>
                 </config>
-                <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
+            <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>172.16.0.1</ip>
+                        <config>
                             <ip>172.16.0.1</ip>
-                            <config>
-                                <ip>172.16.0.1</ip>
                                 <prefix-length>32</prefix-length>
                             </config>
-                        </address>
-                    </addresses>
-                </ipv4>
-                <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
+                    </address>
+                </addresses>
+            </ipv4>
+            <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>fc00::1</ip>
+                        <config>
                             <ip>fc00::1</ip>
-                            <config>
-                                <ip>fc00::1</ip>
                                 <prefix-length>128</prefix-length>
                             </config>
-                        </address>
-                    </addresses>
-                </ipv6>
-            </interface>
-            <interface>
+                    </address>
+                </addresses>
+            </ipv6>
+        </interface>
+        <interface>
+            <name>if1</name>
+            <config>
                 <name>if1</name>
-                <config>
-                    <name>if1</name>
-                    <mtu>1500</mtu>
-                    <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
-                    <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
+                <mtu>1500</mtu>
+                <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+                <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
                     <underlay-binding xmlns="http://ciena.com/ns/yang/ciena-underlay-binding">
-                        <config>
-                            <fd>VLAN600</fd>
-                        </config>
-                    </underlay-binding>
-                    <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
+                    <config>
+                        <fd>VLAN600</fd>
+                    </config>
+                </underlay-binding>
+                <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
                 </config>
-                <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
+            <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>172.16.1.1</ip>
+                        <config>
                             <ip>172.16.1.1</ip>
-                            <config>
-                                <ip>172.16.1.1</ip>
                                 <prefix-length>30</prefix-length>
                             </config>
-                        </address>
-                    </addresses>
-                </ipv4>
-                <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
-                            <ip>fc00::600</ip>
-                            <config>
-                                <ip>fc00::600</ip>
-                                <prefix-length>127</prefix-length>
-                            </config>
-                        </address>
-                    </addresses>
-                </ipv6>
-            </interface>
-            <interface>
-                <name>if5</name>
-                <config>
-                    <name>if5</name>
-                    <mtu>1500</mtu>
-                    <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
-                    <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
-                    <underlay-binding xmlns="http://ciena.com/ns/yang/ciena-underlay-binding">
+                    </address>
+                </addresses>
+            </ipv4>
+            <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>fc00::600</ip>
                         <config>
-                            <fd>VLAN103</fd>
-                        </config>
-                    </underlay-binding>
-                    <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
-                </config>
-                <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
-                            <ip>172.16.103.1</ip>
-                            <config>
-                                <ip>172.16.103.1</ip>
-                                <prefix-length>30</prefix-length>
-                            </config>
-                        </address>
-                    </addresses>
-                </ipv4>
-                <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
-                    <addresses>
-                        <address>
-                            <ip>fc00::605</ip>
-                            <config>
-                                <ip>fc00::605</ip>
+                            <ip>fc00::600</ip>
                                 <prefix-length>127</prefix-length>
                             </config>
-                        </address>
-                    </addresses>
-                </ipv6>
-            </interface>
-        </interfaces>
-        <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
-            <instance>
-                <tag>Bootcamp</tag>
-                <net>49.0001.0172.0016.0001.00</net>
-                <interfaces>
-                    <interface>
-                        <name>lb1</name>
-                        <interface-type>point-to-point</interface-type>
-                        <address-families>
-                            <address-family>
-                                <afi>ipv6</afi>
-                                <safi>unicast</safi>
-                            </address-family>
-                        </address-families>
-                    </interface>
-                    <interface>
-                        <name>if1</name>
-                        <interface-type>point-to-point</interface-type>
-                        <level-type>level-1</level-type>
-                        <address-families>
-                            <address-family>
-                                <afi>ipv6</afi>
-                                <safi>unicast</safi>
-                            </address-family>
-                        </address-families>
-                    </interface>
-                </interfaces>
-                <level-type>level-1</level-type>
-            </instance>
-        </isis>
-        <bgp xmlns="http://ciena.com/ns/yang/ciena-bgp">
-            <instance>
-                <as>65032</as>
-                <router-id>172.16.0.1</router-id>
+                    </address>
+                </addresses>
+            </ipv6>
+        </interface>
+        <interface>
+            <name>if5</name>
+            <config>
+                <name>if5</name>
+                <mtu>1500</mtu>
+                <admin-status xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">true</admin-status>
+                <type xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">ip</type>
+                    <underlay-binding xmlns="http://ciena.com/ns/yang/ciena-underlay-binding">
+                    <config>
+                        <fd>VLAN103</fd>
+                    </config>
+                </underlay-binding>
+                <vrfName xmlns="http://ciena.com/ns/yang/ciena-openconfig-interfaces">default</vrfName>
+                </config>
+            <ipv4 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>172.16.103.1</ip>
+                        <config>
+                            <ip>172.16.103.1</ip>
+                                <prefix-length>30</prefix-length>
+                            </config>
+                    </address>
+                </addresses>
+            </ipv4>
+            <ipv6 xmlns="http://ciena.com/ns/yang/ciena-openconfig-if-ip">
+                <addresses>
+                    <address>
+                        <ip>fc00::605</ip>
+                        <config>
+                            <ip>fc00::605</ip>
+                                <prefix-length>127</prefix-length>
+                            </config>
+                    </address>
+                </addresses>
+            </ipv6>
+        </interface>
+    </interfaces>
+    <isis xmlns="http://ciena.com/ns/yang/ciena-isis">
+        <instance>
+            <tag>Bootcamp</tag>
+            <net>49.0001.0172.0016.0001.00</net>
+            <interfaces>
+                        <interface>
+                    <name>lb1</name>
+                    <interface-type>point-to-point</interface-type>
+                    <address-families>
+                        <address-family>
+                            <afi>ipv6</afi>
+                            <safi>unicast</safi>
+                        </address-family>
+                    </address-families>
+                </interface>
+                                <interface>
+                    <name>if1</name>
+                    <interface-type>point-to-point</interface-type>
+                    <level-type>level-1</level-type>
+                    <address-families>
+                        <address-family>
+                            <afi>ipv6</afi>
+                            <safi>unicast</safi>
+                        </address-family>
+                    </address-families>
+                </interface>
+                                                </interfaces>
+            <level-type>level-1</level-type>
+        </instance>
+    </isis>
+    <bgp xmlns="http://ciena.com/ns/yang/ciena-bgp">
+        <instance>
+            <as>65032</as>
+            <router-id>172.16.0.1</router-id>
+            <address-family>
+                <afi>ipv4</afi>
+                <safi>unicast</safi>
+            </address-family>
+            <address-family>
+                <afi>vpnv4</afi>
+                <safi>unicast</safi>
+            </address-family>
+            <address-family>
+                <afi>l2vpn</afi>
+                <safi>evpn</safi>
+            </address-family>
+            <address-family>
+                <afi>ipv4</afi>
+                <safi>labeled-unicast</safi>
+            </address-family>
+                                <peer>
+                <address>172.16.0.2</address>
+                <remote-as>65032</remote-as>
+                <update-source-interface>lb1</update-source-interface>
                 <address-family>
                     <afi>ipv4</afi>
                     <safi>unicast</safi>
+                    <activate>true</activate>
                 </address-family>
                 <address-family>
                     <afi>vpnv4</afi>
                     <safi>unicast</safi>
+                    <route-reflector-client>false</route-reflector-client>
+                    <activate>true</activate>
                 </address-family>
                 <address-family>
                     <afi>l2vpn</afi>
                     <safi>evpn</safi>
+                    <activate>true</activate>
                 </address-family>
                 <address-family>
                     <afi>ipv4</afi>
                     <safi>labeled-unicast</safi>
+                    <activate>true</activate>
                 </address-family>
-                <peer>
-                    <address>172.16.0.2</address>
-                    <remote-as>65032</remote-as>
-                    <update-source-interface>lb1</update-source-interface>
-                    <address-family>
-                        <afi>ipv4</afi>
-                        <safi>unicast</safi>
-                        <activate>true</activate>
-                    </address-family>
-                    <address-family>
-                        <afi>vpnv4</afi>
-                        <safi>unicast</safi>
-                        <route-reflector-client>false</route-reflector-client>
-                        <activate>true</activate>
-                    </address-family>
-                    <address-family>
-                        <afi>l2vpn</afi>
-                        <safi>evpn</safi>
-                        <activate>true</activate>
-                    </address-family>
-                    <address-family>
-                        <afi>ipv4</afi>
-                        <safi>labeled-unicast</safi>
-                        <activate>true</activate>
-                    </address-family>
-                </peer>
-            </instance>
-        </bgp>
-        <ldp xmlns="http://ciena.com/ns/yang/ciena/ciena-ldp">
-            <instance>
-                <tag>default</tag>
-                <lsr-id>172.16.0.1</lsr-id>
-                <interfaces>
-                    <interface>
-                        <name>if1</name>
-                        <enable-ipv4>true</enable-ipv4>
-                    </interface>
-                </interfaces>
-            </instance>
-        </ldp>
-        <mpls xmlns="http://ciena.com/ns/yang/ciena-mpls">
+            </peer>
+                            </instance>
+    </bgp>
+    <ldp xmlns="http://ciena.com/ns/yang/ciena/ciena-ldp">
+        <instance>
+            <tag>default</tag>
+            <lsr-id>172.16.0.1</lsr-id>
             <interfaces>
                 <interface>
-                    <name>lb1</name>
-                    <label-switching>true</label-switching>
-                </interface>
-                <interface>
-                    <name>if1</name>
-                    <label-switching>true</label-switching>
+                                    <name>if1</name>
+                                                <enable-ipv4>true</enable-ipv4>
                 </interface>
             </interfaces>
-        </mpls>
-    </config>
-</edit-config>
+        </instance>
+    </ldp>
+    <mpls xmlns="http://ciena.com/ns/yang/ciena-mpls">
+        <interfaces>
+            <interface>
+                <name>lb1</name>
+                <label-switching>true</label-switching>
+            </interface>
+             <interface>
+                                <name>if1</name>
+                                            <label-switching>true</label-switching>
+            </interface>
+       </interfaces>
+    </mpls>
+</config> 

@@ -1,19 +1,24 @@
-# saos_netconf
+---
+- hosts:
+    - localhost
+  gather_facts: false
+  vars:
+    ansible_host: 10.92.44.45
+    ansible_user: diag
+    ansible_password: ciena123
+    ansible_network_os: ciena.saos10.saos10
+  tasks:
+    - name: add a static host
+      add_host:
+        name: "static_host"
+        ansible_host: "{{ ansible_host }}"
+        ansible_user: "{{ ansible_user }}"
+        ansible_password: "{{ ansible_password }}"
+        ansible_network_os: "{{ ansible_network_os }}"
 
-## Config generation using Jinja
-
-`ansible-playbook mock.yml`
-
-it will generate ./rpc.xml
-
-## Single device exection (no inventory)
-
-1. modify IP and creds in ./ciena_netconf_lone.yml
-2. ` ansible-playbook ciena_netconf_lone.yml`
-
-Note: the xml contents in ./rpc.xml do not have a root xml parent. This is because the `ansible.netcommon.netconf_rpc` module will add the root xml parent automatically. <edit-config> </edit-config> is injected as the root xml parent for the rpc edit-config operation.
-
-```yml
+- hosts:
+    - static_host
+  gather_facts: false
   tasks:
     - name: Netconf execution
       ansible.netcommon.netconf_rpc:
@@ -32,4 +37,3 @@ Note: the xml contents in ./rpc.xml do not have a root xml parent. This is becau
             </fps>
           </config>
       connection: netconf
-```
