@@ -33,3 +33,11 @@ Note: the xml contents in ./rpc.xml do not have a root xml parent. This is becau
           </config>
       connection: netconf
 ```
+
+## Monitoring
+
+Run this in a device to monitor the netconf session
+
+```bash
+log monitor netconf-rpc all
+```
